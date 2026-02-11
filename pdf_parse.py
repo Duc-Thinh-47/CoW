@@ -16,6 +16,34 @@ def extract_text_from_pdf(file_path):
              Returns an empty string if extraction fails or PDF is scanned image.
     """
     text_content = []
+
+    # We use a mutable container to store state across callbacks
+    # state = [last_text, last_x, last_y]
+    state = {"last_text": None, "last_x": -999, "last_y": -999}
+
+    def visit_text_node(text, cm, tm, font_dict, font_size):
+        if not text or text.strip() == "":
+            return
+
+        # tm is the Text Matrix. tm[4] is X, tm[5] is Y.
+        current_x = tm[4]
+        current_y = tm[5]
+        
+        # Check for duplicates:
+        # 1. Is the text exactly the same as the last one?
+        # 2. Is it very close physically? (e.g., within 2 units/pixels)
+        is_duplicate = (
+            text == state["last_text"] and 
+            abs(current_x - state["last_x"]) < 2 and 
+            abs(current_y - state["last_y"]) < 2
+        )
+
+        if not is_duplicate:
+            text_content.append(text)
+            # Update state
+            state["last_text"] = text
+            state["last_x"] = current_x
+            state["last_y"] = current_y
     
     try:
         reader = PdfReader(file_path)
@@ -28,9 +56,11 @@ def extract_text_from_pdf(file_path):
 
         total_pages = len(reader.pages)
         print(f"Processing '{os.path.basename(file_path)}' ({total_pages} pages)...")
-
+       
         for i, page in enumerate(reader.pages):
-            page_text = page.extract_text()
+            # Reset state for each page to avoid cross-page duplicates
+            state = {"last_text": None, "last_x": -999, "last_y": -999}
+            page_text = page.extract_text(visitor_text=visit_text_node)
             if page_text:
                 # 1. Normalize Unicode (Fixes Ligatures)
                 # This splits 'ﬁ' (one char) into 'f' and 'i' (two chars)
@@ -165,7 +195,6 @@ if __name__ == "__main__":
     test_file = "C:/Users/Tim/Downloads/20250421_vcb_250421_annual_report_2024.pdf"
     test_keywords = ["revenue", "growth", "risk", "esg", "2024"]
     
-    '''
     if os.path.exists(test_file):
         print(f"--- Testing extraction on {test_file} ---")
         final_counts = process_pdf(test_file, test_keywords)
@@ -175,6 +204,5 @@ if __name__ == "__main__":
             print(f"  {k}: {v}")
     else:
         print(f"File {test_file} not found. Please place a PDF in this folder to test.")
-    '''
     
-    debug_missing_words(test_file, "growth")
+    #debug_missing_words(test_file, "growth")
