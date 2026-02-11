@@ -1,0 +1,5 @@
+# Ignore everything in data
+data/*
+
+# But do NOT ignore this specific file (create this empty file)
+!data/.gitkeep
