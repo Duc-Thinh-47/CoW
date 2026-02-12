@@ -85,17 +85,27 @@ def clean_and_count_keywords(text, keywords):
     # 2. Tokenize: Replace non-alphanumeric chars with spaces, then split
     # This ensures "profit." or "profit," is counted as "profit"
     # \w+ matches alphanumeric characters (including underscores)
-    words = re.findall(r'\b\w+\b', text)
-    
+    # \b\w+\b would match whole words (star to end), but it can miss words with apostrophes or hyphens.
+    #words = re.findall(r'\b\w+\b', text)
+
     # 3. Create a frequency map of all words in the text
-    word_counts = Counter(words)
+    #word_counts = Counter(words)
     
     # 4. Extract counts for our specific keywords
+    # Currently, this is matching substrings, meaning "growth" will match "growth" and "growths". 
+    # If want exact matches, use word_counts directly.
     results = {}
     for k in keywords:
         # Normalize keyword to lowercase for matching
         clean_k = k.lower().strip()
-        results[k] = word_counts.get(clean_k, 0)
+        
+        # Un-comment the line below if you want to count exact matches only (not substrings)
+        #results[k] = word_counts.get(clean_k, 0)
+
+        if clean_k: 
+            results[k] = text.count(clean_k)
+        else: 
+            results[k] = 0
         
     return results
 
@@ -112,7 +122,7 @@ def process_pdf(file_path, keywords):
 if __name__ == "__main__":
     # Create a dummy PDF for testing if one doesn't exist
     # (Or replace 'sample.pdf' with a real path on your machine)
-    test_file = "./data/20250421_vcb_250421_annual_report_2024.pdf"
+    test_file = "../Data/20250421_vcb_250421_annual_report_2024.pdf"
     test_keywords = ["revenue", "growth", "risk", "esg", "2024"]
     
     if os.path.exists(test_file):
