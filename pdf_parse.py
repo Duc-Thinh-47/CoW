@@ -1,7 +1,7 @@
 import re
 import unicodedata
+import pdfplumber
 from collections import Counter
-from pypdf import PdfReader
 import os
 
 def extract_text_from_pdf(file_path):
@@ -17,66 +17,42 @@ def extract_text_from_pdf(file_path):
     """
     text_content = []
 
-    # We use a mutable container to store state across callbacks
-    # state = [last_text, last_x, last_y]
-    state = {"last_text": None, "last_x": -999, "last_y": -999}
+    print(f"Processing '{os.path.basename(file_path)}' with pdfplumber...")
 
-    def visit_text_node(text, cm, tm, font_dict, font_size):
-        if not text or text.strip() == "":
-            return
-
-        # tm is the Text Matrix. tm[4] is X, tm[5] is Y.
-        current_x = tm[4]
-        current_y = tm[5]
-        
-        # Check for duplicates:
-        # 1. Is the text exactly the same as the last one?
-        # 2. Is it very close physically? (e.g., within 2 units/pixels)
-        is_duplicate = (
-            text == state["last_text"] and 
-            abs(current_x - state["last_x"]) < 2 and 
-            abs(current_y - state["last_y"]) < 2
-        )
-
-        if not is_duplicate:
-            text_content.append(text)
-            # Update state
-            state["last_text"] = text
-            state["last_x"] = current_x
-            state["last_y"] = current_y
-    
     try:
-        reader = PdfReader(file_path)
-        
-        # Check if encrypted
-        if reader.is_encrypted:
-            # If you have a password, you can add: reader.decrypt('password')
-            print(f"Warning: {file_path} is encrypted. Skipping.")
-            return ""
-
-        total_pages = len(reader.pages)
-        print(f"Processing '{os.path.basename(file_path)}' ({total_pages} pages)...")
-       
-        for i, page in enumerate(reader.pages):
-            # Reset state for each page to avoid cross-page duplicates
-            state = {"last_text": None, "last_x": -999, "last_y": -999}
-            page_text = page.extract_text(visitor_text=visit_text_node)
-            if page_text:
-                # 1. Normalize Unicode (Fixes Ligatures)
-                # This splits 'ﬁ' (one char) into 'f' and 'i' (two chars)
-                # NFKD form decomposes characters into their base components
-                page_text = unicodedata.normalize('NFKD', page_text)
-
-                # 2. Fix Hyphenation at Line Breaks
-                # Regex: Find a hyphen followed immediately by a newline (and optional whitespace)
-                # Replace it with nothing (joining the word)
-                # Example: "strat- \n egy" becomes "strategy"
-                page_text = re.sub(r'-\s*\n\s*', '', page_text)
-                text_content.append(page_text)
-            else:
-                # This often happens with scanned images inside PDFs
-                pass
+        # pdfplumber.open() is the context manager (like open())
+        with pdfplumber.open(file_path) as pdf:
+            
+            # Check if encrypted (pdfplumber wraps pypdf, so this might raise an error directly)
+            # usually handled by passing password to open() if known.
+            
+            total_pages = len(pdf.pages)
+            
+            for i, page in enumerate(pdf.pages):
+                # --- THE MAGIC HAPPENS HERE ---
+                # x_tolerance=2: If two chars are < 2px apart, they are one word.
+                #                If they are > 2px, insert a space. 
+                #                This FIXES your "RevenueGrowth" -> "Revenue Growth" issue.
+                # y_tolerance=3: Groups lines that are close together.
+                # layout=True forces a complex analysis of rows/cols
+                # dedupe=True attempts to remove overlapping chars (Shadow Text)
+                raw_text = page.extract_text(layout=True, dedupe=True, x_tolerance=2, y_tolerance=3)
                 
+                if raw_text:
+                    # 1. Normalize Unicode (Fixes Ligatures like 'ﬁ' -> 'fi')
+                    # NFKD decomposes characters into base components
+                    norm_text = unicodedata.normalize('NFKD', raw_text)
+
+                    # 2. Fix Hyphenation at Line Breaks
+                    # "strat- \n egy" -> "strategy"
+                    # We use strict regex to avoid merging "Strategy - Execution"
+                    clean_text = re.sub(r'-\s*\n\s*', '', norm_text)
+                    
+                    text_content.append(clean_text)
+                else:
+                    # Page exists but no text found (likely image/scanned)
+                    pass
+
         full_text = " ".join(text_content)
         
         # Simple check for scanned PDFs (image-only)
@@ -132,67 +108,11 @@ def process_pdf(file_path, keywords):
     counts = clean_and_count_keywords(raw_text, keywords)
     return counts
 
-def debug_missing_words(file_path, keyword):
-    """
-    Scans a PDF using pypdf and prints the context around every match found.
-    Use this to identify which specific instances are being missed.
-    """
-    # --- usage ---
-    # Replace with your actual file path
-    # debug_missing_words("your_annual_report.pdf", "growth")
-    keyword = keyword.lower()
-    total_found = 0
-    
-    print(f"--- Debugging matches for '{keyword}' using pypdf ---")
-    
-    try:
-        reader = PdfReader(file_path)
-        
-        for i, page in enumerate(reader.pages):
-            # Extract text
-            text = page.extract_text()
-            if not text:
-                continue
-                
-            # Normalize to lower case for searching
-            text_lower = text.lower()
-            
-            # Find all matches (using word boundaries \b to match exact words)
-            # re.finditer gives us the position (index) of every match
-            matches = list(re.finditer(r'\b' + re.escape(keyword) + r'\b', text_lower))
-            
-            if matches:
-                print(f"\nPage {i+1}: Found {len(matches)} times")
-                
-                for match in matches:
-                    start_index = match.start()
-                    end_index = match.end()
-                    
-                    # Grab 40 characters before and after the match for context
-                    # max/min ensures we don't crash if match is at start/end of page
-                    context_start = max(0, start_index - 40)
-                    context_end = min(len(text), end_index + 40)
-                    
-                    # Extract the snippet from the ORIGINAL text (preserves case/format)
-                    snippet = text[context_start:context_end]
-                    
-                    # Clean up newlines/tabs in the snippet for cleaner printing
-                    clean_snippet = snippet.replace('\n', ' ').replace('\r', ' ')
-                    
-                    print(f"   Context: ...{clean_snippet}...")
-                
-                total_found += len(matches)
-                
-    except Exception as e:
-        print(f"Error reading PDF: {e}")
-
-    print(f"\nTotal '{keyword}' found by pypdf: {total_found}")
-
 # --- Test Block (Runs only if you execute this file directly) ---
 if __name__ == "__main__":
     # Create a dummy PDF for testing if one doesn't exist
     # (Or replace 'sample.pdf' with a real path on your machine)
-    test_file = "C:/Users/Tim/Downloads/20250421_vcb_250421_annual_report_2024.pdf"
+    test_file = "./data/20250421_vcb_250421_annual_report_2024.pdf"
     test_keywords = ["revenue", "growth", "risk", "esg", "2024"]
     
     if os.path.exists(test_file):
@@ -205,4 +125,3 @@ if __name__ == "__main__":
     else:
         print(f"File {test_file} not found. Please place a PDF in this folder to test.")
     
-    #debug_missing_words(test_file, "growth")
