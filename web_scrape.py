@@ -1,189 +1,125 @@
+import os
 import time
-import random
-from playwright.sync_api import sync_playwright
-import trafilatura
+import requests
+import csv
+from dotenv import load_dotenv
 
-def mimic_human_scroll(page):
-    """
-    Solves 'Lazy Loading' and 'Infinite Scroll'.
-    Scrolls down the page in increments to trigger JS loading events.
-    """
-    last_height = page.evaluate("document.body.scrollHeight")
-    
-    while True:
-        # Scroll down by a random amount to look human
-        page.mouse.wheel(0, random.randint(500, 1000))
-        page.wait_for_timeout(random.randint(500, 1500)) # Wait for content to load
-        
-        new_height = page.evaluate("document.body.scrollHeight")
-        if new_height == last_height:
-            # If height hasn't changed after scrolling, we reached the bottom
-            break
-        last_height = new_height
-        
-def get_clean_text_from_html(html_content):
-    """
-    Uses Trafilatura to extract ONLY the main text and tables.
-    This removes 'noise' like generic footers/navbars that would
-    inflate your keyword counts (e.g. 'Contact Us' on every page).
-    """
-    # include_tables=True is CRITICAL for financial data
-    return trafilatura.extract(html_content, include_tables=True, include_comments=False)
+# Load environment variables
+load_dotenv()
+DATA_DIR = "data"
+OUTPUT_FILE = os.path.join(DATA_DIR, "fintech_index_website_raw_data.csv")
 
-def count_keywords_ctrl_f(text, keywords, debug=False, window=50):
-    """
-    Counts keywords using substring matching.
-    
-    Args:
-        text (str): The content to search.
-        keywords (list): List of terms to count.
-        debug (bool): If True, prints the context around found words.
-        window (int): Number of characters to show before/after match.
-        
-    Returns:
-        dict: {keyword: count}
-    """
-    if not text:
-        return {k: 0 for k in keywords}
-    
-    text_lower = text.lower()
-    results = {}
-    
-    if debug:
-        print(f"\n🔎 --- DEBUGGING CONTEXT ---")
+def fetch_bank_keyword_mentions(domain, keyword, api_key):
+    """Queries SerpApi for the keyword on the bank's domain."""
+    query = f'site:{domain} "{keyword}"'
+    url = "https://serpapi.com/search"
+    params = {
+        "engine": "google",
+        "q": query,
+        "gl": "vn",
+        "api_key": api_key
+    }
 
-    for k in keywords:
-        k_lower = k.lower()
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status() 
+        data = response.json()
+
+        # Check for API errors (e.g., out of credits)
+        if "error" in data:
+            print(f"   🚨 API Error: {data['error']}")
+            return -1 # Return -1 to signal a hard stop
+
+        total_results = data.get('search_information', {}).get('total_results', 0)
+        return total_results
+
+    except Exception as e:
+        print(f"   ❌ Error processing {domain}: {e}")
+        return 0
+
+def get_completed_searches(csv_filename):
+    """Reads the CSV to find which Bank+Keyword combos are already done."""
+    os.makedirs(DATA_DIR, exist_ok=True)
+    completed = set()
+    if os.path.exists(csv_filename):
+        with open(csv_filename, mode='r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            next(reader, None) # Skip header
+            for row in reader:
+                if len(row) >= 2:
+                    bank, keyword = row[0], row[1]
+                    completed.add(f"{bank}_{keyword}")
+    return completed
+
+def main():
+    API_KEY = os.environ.get("SERPAPI_KEY")
+    if not API_KEY:
+        print("🚨 ERROR: Missing SERPAPI_KEY! Please check your .env file.")
+        return
+    
+    # 1. Check what we have already completed to save API credits
+    completed_searches = get_completed_searches(OUTPUT_FILE)
+
+    # 2. Open the CSV file in 'append' mode ('a'). 
+    # This ensures we add to the end of the file instead of overwriting it.
+    file_exists = os.path.exists(OUTPUT_FILE)
+    
+    with open(OUTPUT_FILE, mode='a', newline='', encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file)
         
-        # 1. Initialize count and search position
-        count = 0
-        start_index = 0
-        
-        # 2. Loop to find ALL occurrences (simulates .count() but keeps indices)
-        while True:
-            # Find next occurrence of the keyword
-            idx = text_lower.find(k_lower, start_index)
-            
-            # If not found, stop looking for this keyword
-            if idx == -1:
-                break
-            
-            # Found one! Increment count
-            count += 1
-            
-            # 3. If Debugging is ON, print the context immediately
-            if debug:
-                # Calculate start/end of the context window
-                # max/min prevents crashing if we are at the very start/end of text
-                left = max(0, idx - window)
-                right = min(len(text), idx + len(k) + window)
+        # Write headers if it's a brand new file
+        if not file_exists:
+            writer.writerow(['Bank', 'Keyword', 'TotalResults'])
+
+        banks = {
+            'Vietcombank': 'vietcombank.com.vn',
+            #'Techcombank': 'techcombank.com',
+            #'MB Bank': 'mbbank.com.vn',
+            # Add your full list of banks here
+        }
+
+        keywords = [
+            'Blockchain', 
+            'fintech', 
+            #'BaaS'
+            # Add your full list of keywords here
+        ]
+
+        print(f"🚀 Starting Data Extraction (Saving to {OUTPUT_FILE})...\n")
+
+        for bank_name, domain in banks.items():
+            for kw in keywords:
+                # Create a unique ID for this search to check against our completed list
+                search_id = f"{bank_name}_{kw}"
                 
-                # Extract the snippet
-                snippet = text[left:right]
+                if search_id in completed_searches:
+                    print(f"   ⏭️ Skipping '{bank_name} + {kw}' (Already in CSV)")
+                    continue
+
+                print(f"🏦 Fetching: {bank_name} -> '{kw}'...")
                 
-                # Clean up newlines for cleaner printing
-                clean_snippet = snippet.replace('\n', ' ').replace('\r', '')
+                total_hits = fetch_bank_keyword_mentions(domain, kw, API_KEY)
                 
-                print(f"   ['{k}'] Found: \"...{clean_snippet}...\"")
+                # If we hit an API limit/error, safely exit the script
+                if total_hits == -1:
+                    print("\n🛑 Stopping execution due to API error. Progress has been saved.")
+                    return
 
-            # Move start_index forward to find the NEXT one
-            start_index = idx + 1
+                # Save the result immediately to the CSV
+                writer.writerow([bank_name, kw, total_hits])
+                
+                # Flush forces Python to write to the hard drive immediately 
+                # instead of holding it in memory
+                csv_file.flush() 
+
+                print(f"   ✅ Found {total_hits} results. Saved.")
+                
+                # Polite delay for the API
+                time.sleep(1.5) 
+                
+            print("-" * 40)
             
-        results[k] = count
+    print(f"\n🎉 Extraction Complete! Data is ready in {OUTPUT_FILE}")
 
-    if debug:
-        print(f"---------------------------\n")
-
-    return results
-
-def universal_ctrl_f_scraper(url, keywords):
-    print(f"🕵️‍♂️ Starting Universal Ctrl+F on: {url}")
-    
-    with sync_playwright() as p:
-        # --- 1. ANTI-DETECTION SETUP ---
-        # Launch browser with specific flags to hide automation
-        browser = p.chromium.launch(headless=True)
-        
-        # Context mimics a real device (London, UK example)
-        context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            viewport={'width': 1920, 'height': 1080},
-            locale='en-US',
-            timezone_id='Asia/Ho_Chi_Minh'
-        )
-        
-        page = context.new_page()
-        
-        # Block unnecessary resources to speed up loading (Images/Fonts)
-        # We only need text!
-        page.route("**/*.{png,jpg,jpeg,svg,css,woff,woff2}", lambda route: route.abort())
-        
-        try:
-            # --- 2. NAVIGATION & ACCESS ---
-            # 'domcontentloaded' is faster than 'networkidle'
-            # We rely on our scroll logic to catch the rest.
-            page.goto(url, wait_until='domcontentloaded', timeout=45000)
-            
-            # --- 3. DYNAMIC CONTENT HANDLING ---
-            # Solve "Lazy Loading" by scrolling to the bottom
-            print("   ↳ Scrolling to trigger lazy loads...")
-            mimic_human_scroll(page)
-            
-            # --- 4. IFRAME HANDLING (Advanced) ---
-            # Some banks put data inside iframes. We grab the main frame
-            # AND any visible child frames.
-            full_html = page.content()
-            
-            # (Optional) Iterate iframes if you suspect hidden data
-            for frame in page.frames:
-                try:
-                    # Append iframe content to main content
-                    full_html += "\n" + frame.content()
-                except:
-                    pass # Security cross-origin might block some, ignore.
-
-            # --- 5. EXTRACTION & CLEANING ---
-            page.screenshot(path=f"..\\Data\\Web\\{url.replace('https://', '').replace('/', '_')}_scroll.png", full_page=True)
-            print("   ↳ Extracting and Cleaning text...")
-            clean_text = get_clean_text_from_html(full_html)
-            
-            if not clean_text:
-                print("   ❌ Warning: No readable text found.")
-                return None
-
-            # --- 6. COUNTING ---
-            print("   ↳ Counting keywords...")
-            counts = count_keywords_ctrl_f(clean_text, keywords, debug=True, window=20)
-            
-            # Metrics for your entropy analysis later
-            return {
-                "url": url,
-                "status": "success",
-                "keyword_counts": counts,
-                "total_word_count": len(clean_text.split()),
-                "extracted_text_sample": clean_text[:200] # For debugging
-            }
-
-        except Exception as e:
-            print(f"   🔥 Critical Error: {e}")
-            return {"url": url, "status": "failed", "error": str(e)}
-        
-        finally:
-            browser.close()
-
-# --- USAGE ---
-target_urls = [
-    #"https://www.jpmorganchase.com/",
-    #"https://www.citi.com/"
-    "https://www.bankofamerica.com/",
-    # Add more URLs
-]
-
-search_terms = ["revenue", "growth", "risk", "sustainable", "esg", "profit", "bank"]
-
-for url in target_urls:
-    data = universal_ctrl_f_scraper(url, search_terms)
-    if data and data["status"] == "success":
-        print(f"   ✅ RESULT: {data['keyword_counts']}")
-    else:
-        print("   ❌ FAILED")
+if __name__ == "__main__":
+    main()
