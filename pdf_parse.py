@@ -117,21 +117,3 @@ def process_pdf(file_path, keywords):
     raw_text = extract_text_from_pdf(file_path)
     counts = clean_and_count_keywords(raw_text, keywords)
     return counts
-
-# --- Test Block (Runs only if you execute this file directly) ---
-if __name__ == "__main__":
-    # Create a dummy PDF for testing if one doesn't exist
-    # (Or replace 'sample.pdf' with a real path on your machine)
-    test_file = "../Data/20250421_vcb_250421_annual_report_2024.pdf"
-    test_keywords = ["revenue", "growth", "risk", "esg", "2024"]
-    
-    if os.path.exists(test_file):
-        print(f"--- Testing extraction on {test_file} ---")
-        final_counts = process_pdf(test_file, test_keywords)
-        
-        print("\nResults:")
-        for k, v in final_counts.items():
-            print(f"  {k}: {v}")
-    else:
-        print(f"File {test_file} not found. Please place a PDF in this folder to test.")
-    
