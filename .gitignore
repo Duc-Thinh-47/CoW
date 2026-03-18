@@ -1,7 +1,8 @@
 # Ignore everything in data
-data/*
+#data/*
 .env
 
 # But do NOT ignore this specific file (create this empty file)
 !data/.gitkeep
 !data/fintech_index_website_raw_data.csv
+!data/keyword_inventory.csv

@@ -81,11 +81,31 @@ def calculate_entropy_weights(P):
         
     return E, W
 
+def calculate_final_scores(P, W):
+    """
+    Calculates the final Fintech Index score for each bank.
+    
+    Args:
+        P (np.array): The normalized data matrix (Banks x Keywords).
+        W (np.array): The calculated weights for each keyword.
+        
+    Returns:
+        np.array: A 1D array of final scores for each bank.
+    """
+    # Multiply each column (keyword) in the normalized matrix by its specific weight
+    weighted_matrix = P * W
+    
+    # Sum the weighted scores across the rows (axis=1) to get the final score per bank
+    final_scores = np.sum(weighted_matrix, axis=1)
+    
+    return final_scores
+
 # --- Usage ---
 # Raw data should be comprised of alternatives (ROWS) and criterion (COLLUMNS)
 # In the case of Fintech data, the ROWS should be the names of the firms and 
 # the COLLUMNS should be the keywords
 # sample data from this video: https://www.youtube.com/watch?v=8OeXP9tAadM
+'''
 raw_data = [
     [2, 1500, 20000, 5.5, 5, 9], 
     [2.5, 2700, 18000, 6.5, 3, 5], 
@@ -110,3 +130,4 @@ print(np.round(weights, 4))
 
 # Check: Weights should sum to 1
 print("\nSum of Weights:", np.round(np.sum(weights), 2))
+'''
