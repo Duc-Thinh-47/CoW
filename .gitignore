@@ -1,6 +1,8 @@
 # Ignore everything in data
 #data/*
 .env
+__pycache__/
+*.py[cod]
 
 # But do NOT ignore this specific file (create this empty file)
 !data/.gitkeep
