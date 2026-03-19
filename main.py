@@ -23,7 +23,7 @@ def get_completed_searches(csv_filename):
                     completed.add(f"{bank}_{keyword}")
     return completed
 
-def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS):
+def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS_DICT):
     """Processes all PDFs for the banks in our inventory."""
     print(f"\n🚀 [MODULE 1] Starting PDF Extraction for {len(banks_data)} banks...\n")
     
@@ -37,14 +37,16 @@ def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS):
         
         # Write headers only if it's a new file
         if not file_exists:
-            writer.writerow(['Bank', 'Keyword', 'TotalResults'])
+            # Changed 'Keyword' to 'KeywordIndex' to reflect the new structure
+            writer.writerow(['Bank', 'KeywordIndex', 'TotalResults'])
         
         for bank_row in banks_data:
             bank_name = bank_row['Bank_Name'].strip()
             
-            # NEW: If the first keyword for this bank is in our completed list, 
+            # NEW: If the first KeywordIndex (e.g., Kw1) for this bank is in our completed list, 
             # we know this entire bank has already been processed. Skip it!
-            if KEYWORDS and f"{bank_name}_{KEYWORDS[0]}" in completed_searches:
+            first_kw_index = list(KEYWORDS_DICT.keys())[0] if KEYWORDS_DICT else None
+            if first_kw_index and f"{bank_name}_{first_kw_index}" in completed_searches:
                 print(f"   ⏭️ Skipping '{bank_name}' PDFs (Already in CSV)")
                 continue
             
@@ -52,7 +54,9 @@ def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS):
             pdf_files = [pdf.strip() for pdf in raw_pdf_string.split('|') if pdf.strip()]
             
             print(f"🏦 Processing PDFs for {bank_name} ({len(pdf_files)} PDFs found)...")
-            total_bank_counts = {kw: 0 for kw in KEYWORDS}
+            
+            # Initialize buckets for Kw1, Kw2, etc.
+            total_bank_counts = {kw_index: 0 for kw_index in KEYWORDS_DICT.keys()}
             
             for pdf_name in pdf_files:
                 pdf_path = os.path.join("data", pdf_name) # Ensure your path is correct here
@@ -60,14 +64,22 @@ def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS):
                 if not os.path.exists(pdf_path):
                     print(f"   ❌ Missing file: {pdf_path}. Skipping this file.")
                     continue
-                    
-                pdf_counts = process_pdf(pdf_path, KEYWORDS)
                 
-                for kw in KEYWORDS:
-                    total_bank_counts[kw] += pdf_counts.get(kw, 0)
+                # Flatten the dictionary into a single massive list of all secondary words
+                # so the PDF parser knows exactly what individual strings to look for.
+                all_words_to_find = [word for sublist in KEYWORDS_DICT.values() for word in sublist]
+                
+                # Get the raw counts for every individual word found in the PDF
+                pdf_counts = process_pdf(pdf_path, all_words_to_find)
+                
+                # Pool the raw counts back into their main KeywordIndex buckets
+                for kw_index, kw_list in KEYWORDS_DICT.items():
+                    for word in kw_list:
+                        total_bank_counts[kw_index] += pdf_counts.get(word, 0)
             
-            for kw in KEYWORDS:
-                writer.writerow([bank_name, kw, total_bank_counts[kw]])
+            # Save the pooled counts using the Kw Index so it perfectly matches the Web Scraper output
+            for kw_index in KEYWORDS_DICT.keys():
+                writer.writerow([bank_name, kw_index, total_bank_counts[kw_index]])
             
             out_f.flush()
             total_hits = sum(total_bank_counts.values())
@@ -76,7 +88,7 @@ def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS):
 
     print(f"🎉 PDF Pipeline Complete! Saved to {PDF_OUTPUT_FILE}\n")
 
-def handle_web_scraping(banks_data, WEB_OUTPUT_FILE, KEYWORDS, API_KEY):
+def handle_web_scraping(banks_data, WEB_OUTPUT_FILE, KEYWORDS_DICT, API_KEY):
     """Processes SerpApi web scraping for all banks in our inventory."""
     print(f"🚀 [MODULE 2] Starting Web Scraper for {len(banks_data)} banks...\n")
     
@@ -89,7 +101,8 @@ def handle_web_scraping(banks_data, WEB_OUTPUT_FILE, KEYWORDS, API_KEY):
         writer = csv.writer(csv_file)
         
         if not file_exists:
-            writer.writerow(['Bank', 'Keyword', 'TotalResults'])
+            # Note: Changed 'Keyword' to 'KeywordIndex' to reflect the new structure
+            writer.writerow(['Bank', 'KeywordIndex', 'TotalResults'])
 
         for bank_row in banks_data:
             bank_name = bank_row['Bank_Name'].strip()
@@ -100,25 +113,31 @@ def handle_web_scraping(banks_data, WEB_OUTPUT_FILE, KEYWORDS, API_KEY):
                 print(f"   ⚠️ No domain found for {bank_name}. Skipping web scrape.")
                 continue
 
-            for kw in KEYWORDS:
-                search_id = f"{bank_name}_{kw}"
+            # Loop through the Dictionary keys (Kw1, Kw2, etc.) and their lists of words
+            for kw_index, kw_list in KEYWORDS_DICT.items():
+                search_id = f"{bank_name}_{kw_index.lower()}"
+                main_keyword = kw_list[0] # The first word in the list is our display name
                 
                 if search_id in completed_searches:
-                    print(f"   ⏭️ Skipping '{bank_name} + {kw}' (Already in CSV)")
+                    print(f"   ⏭️ Skipping '{bank_name} + {kw_index}' (Already in CSV)")
                     continue
 
-                print(f"🌐 Fetching: {bank_name} -> '{kw}'...")
+                print(f"🌐 Fetching: {bank_name} -> {kw_index} ({main_keyword})...")
                 
-                # Hand the task to the Dumb Worker
-                total_hits = fetch_bank_keyword_mentions(domain, kw, API_KEY)
+                # Build the OR query string
+                # This turns ["FinTech", "E-finance"] into: '("FinTech" OR "E-finance")'
+                or_query = "(" + " OR ".join([f'"{kw}"' for kw in kw_list]) + ")"
+                
+                # Hand the task to the Dumb Worker, passing the massive OR string instead of one word
+                total_hits = fetch_bank_keyword_mentions(domain, or_query, API_KEY)
                 
                 # If we hit an API limit/error, safely exit the scraper module
                 if total_hits == -1:
                     print("\n🛑 Stopping Web Scraper due to API error. Progress saved.")
                     return
 
-                # Save the result immediately and flush
-                writer.writerow([bank_name, kw, total_hits])
+                # Save the result immediately using the kw_index (Kw1) and flush
+                writer.writerow([bank_name, kw_index, total_hits])
                 csv_file.flush() 
 
                 print(f"   ✅ Found {total_hits} results.")
@@ -222,19 +241,22 @@ def main():
     os.makedirs("data", exist_ok=True)
 
     # --- STEP 1: LOAD KEYWORDS ---
-    loaded_keywords = set()
+    keywords_dict = {}
     try:
         with open(KEYWORD_INVENTORY_FILE, mode='r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                keyword = row['Keyword'].strip().lower() 
-                if keyword:
-                    loaded_keywords.add(keyword)
+                kw_index = row['KeywordIndex'].strip()
+                keyword = row['Keyword'].strip().lower()
+                
+                if kw_index not in keywords_dict:
+                    keywords_dict[kw_index] = []
+                keywords_dict[kw_index].append(keyword)
     except FileNotFoundError:
         print(f"🚨 ERROR: {KEYWORD_INVENTORY_FILE} not found!")
-        return 
+        return
     
-    KEYWORDS = list(loaded_keywords)
+    KEYWORDS = keywords_dict
 
     # --- STEP 2: LOAD MASTER INVENTORY ---
     banks_data = []
