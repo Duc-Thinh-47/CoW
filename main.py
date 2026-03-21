@@ -46,7 +46,7 @@ def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS_DICT):
             # NEW: If the first KeywordIndex (e.g., Kw1) for this bank is in our completed list, 
             # we know this entire bank has already been processed. Skip it!
             first_kw_index = list(KEYWORDS_DICT.keys())[0] if KEYWORDS_DICT else None
-            if first_kw_index and f"{bank_name}_{first_kw_index}" in completed_searches:
+            if first_kw_index and f"{bank_name}_{first_kw_index.lower()}" in completed_searches:
                 print(f"   ⏭️ Skipping '{bank_name}' PDFs (Already in CSV)")
                 continue
             
@@ -59,7 +59,7 @@ def handle_pdfs(banks_data, PDF_OUTPUT_FILE, KEYWORDS_DICT):
             total_bank_counts = {kw_index: 0 for kw_index in KEYWORDS_DICT.keys()}
             
             for pdf_name in pdf_files:
-                pdf_path = os.path.join("data", pdf_name) # Ensure your path is correct here
+                pdf_path = os.path.join("data/raw_pdfs", pdf_name) # Ensure your path is correct here
                 
                 if not os.path.exists(pdf_path):
                     print(f"   ❌ Missing file: {pdf_path}. Skipping this file.")
@@ -143,7 +143,7 @@ def handle_web_scraping(banks_data, WEB_OUTPUT_FILE, KEYWORDS_DICT, API_KEY):
                 print(f"   ✅ Found {total_hits} results.")
                 
                 # Polite delay for the API
-                time.sleep(1.5) 
+                time.sleep(2.0) 
                 
             print("-" * 40)
             
@@ -233,7 +233,8 @@ def main():
     
     # --- CONFIGURATION ---
     INVENTORY_FILE = "data/bank_inventory.csv"
-    KEYWORD_INVENTORY_FILE = "data/keyword_inventory.csv" 
+    # KEYWORD_INVENTORY_FILE = "data/keyword_inventory.csv" 
+    KEYWORD_INVENTORY_FILE = "data/test_kw_inventory.csv" # shorten list for testing
     PDF_OUTPUT_FILE = "data/fintech_index_pdf_results.csv"
     WEB_OUTPUT_FILE = "data/fintech_index_web_results.csv"
     FINAL_OUTPUT_FILE = "data/fintech_index_final_scores.csv"
