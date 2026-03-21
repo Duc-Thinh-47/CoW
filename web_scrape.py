@@ -1,14 +1,18 @@
 import re
 import requests
 
-def fetch_bank_keyword_mentions(domain, keyword, api_key):
+def fetch_bank_keyword_mentions(domain, keyword, api_key, year_str):
     """
-    Queries SerpApi for the keyword on the bank's domain.
+    Queries SerpApi for the keyword on the bank's domain within a specific year.
     Implements a 4-step fallback to capture missing Total Results 
     while bypassing Google's estimate blocks.
     """
     query = f"site:{domain} {keyword}"
     url = "https://serpapi.com/search"
+    
+    # Construct the Custom Date Range (tbs) string for the specific year.
+    # cdr:1 turns on the custom date range. cd_min is start date, cd_max is end date.
+    time_filter = f"cdr:1,cd_min:1/1/{year_str},cd_max:12/31/{year_str}"
     
     # Base parameters (num=100 per your spec, no filter=0)
     params = {
@@ -17,6 +21,7 @@ def fetch_bank_keyword_mentions(domain, keyword, api_key):
         "gl": "vn", 
         "num": "100",   
         "filter": "0",
+        "tbs": time_filter, # NEW: Injecting the time filter into the API call
         "api_key": api_key
     }
 
@@ -92,5 +97,5 @@ def fetch_bank_keyword_mentions(domain, keyword, api_key):
         return final_calculated_total
 
     except Exception as e:
-        print(f"   ❌ Error processing {domain} for '{keyword}': {e}")
+        print(f"   ❌ Error processing {domain} for '{keyword}' ({year_str}): {e}")
         return 0
