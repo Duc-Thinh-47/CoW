@@ -8,6 +8,7 @@ import numpy as np
 from pdf_parse import process_pdf 
 from web_scrape import fetch_bank_keyword_mentions
 from entropy import proportion_normalization, calculate_entropy_weights, calculate_final_scores
+from manual_helper import run_manual_web_helper
 
 def get_completed_searches(csv_filename):
     """Reads the CSV to find which Year+Bank+Keyword combos are already done."""
@@ -259,6 +260,7 @@ def main():
     RUN_PDF_MODULE = True
     RUN_WEB_MODULE = False
     RUN_INDEX_CALCULATION = True
+    RUN_MANUAL_WEB_HELPER = True
     # ===============================================
 
     # --- CONFIGURATION ---
@@ -313,6 +315,11 @@ def main():
             handle_web_scraping(banks_data, WEB_OUTPUT_FILE, KEYWORDS, API_KEY)
     else:
         print("⏸️  Skipping Web Module (Toggle is Off)")
+    
+    if RUN_MANUAL_WEB_HELPER:
+        run_manual_web_helper(banks_data, WEB_OUTPUT_FILE, KEYWORDS)
+    else:
+        print("⏸️  Skipping Manual Web Helper (Toggle is Off)")
 
     if RUN_INDEX_CALCULATION:
         calculate_fintech_index(PDF_OUTPUT_FILE, WEB_OUTPUT_FILE, FINAL_OUTPUT_FILE, KEYWORDS, banks_data)
