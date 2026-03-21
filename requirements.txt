@@ -19,6 +19,7 @@ pycparser==3.0
 pyee==13.0.0
 pypdf==6.7.0
 pypdfium2==5.4.0
+pyperclip==1.11.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
 pytz==2025.2

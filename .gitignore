@@ -1,5 +1,6 @@
 # Ignore everything in data
 #data/*
+data/raw_pdfs/
 .env
 __pycache__/
 *.py[cod]
