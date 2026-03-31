@@ -1,2 +1,23 @@
 Country,Bank_Name,Domain,PDF_Files
-Singapore,United Overseas Bank,uobgroup.com,uob_2025.pdf|uob_2024.pdf
+Singapore,Oversea-Chinese Banking Corporation Ltd, ocbc.com,ocbc_2025.pdf|ocbc_2024.pdf|ocbc_2023.pdf|ocbc_2022.pdf|ocbc_2021.pdf|ocbc_2020.pdf|ocbc_2019.pdf|ocbc_2018.pdf|ocbc_2017.pdf|ocbc_2016.pdf|ocbc_2015.pdf
+India, HDFC Bank Ltd, hdfcbank.com, HDFC_2025.pdf|HDFC_2024.pdf|HDFC_2023.pdf|HDFC_2022.pdf|HDFC_2021.pdf|HDFC_2020.pdf|HDFC_2019.pdf|HDFC_2018.pdf|HDFC_2017.pdf|HDFC_2016.pdf|HDFC_2015.pdf
+India, City Union Bank Ltd, cityunionbank.bank.in, CUB_2025.pdf|CUB_2024.pdf|CUB_2023.pdf|CUB_2022.pdf|CUB_2021.pdf|CUB_2020.pdf|CUB_2019.pdf|CUB_2018.pdf|CUB_2017.pdf|CUB_2016.pdf|CUB_2015.pdf
+India, Jammu and Kashmir Bank Ltd, jkb.bank.in, JKB_2025.pdf|JKB_2024.pdf|JKB_2023.pdf|JKB_2022.pdf|JKB_2021.pdf|JKB_2020.pdf|JKB_2019.pdf|JKB_2018.pdf|JKB_2017.pdf|JKB_2016.pdf|JKB_2015.pdf
+Singapore,United Overseas Bank Ltd,uobgroup.com,uob_2025.pdf|uob_2024.pdf|uob_2023.pdf|uob_2022.pdf|uob_2021.pdf|uob_2020.pdf|uob_2019.pdf|uob_2018.pdf|uob_2017.pdf|uob_2016.pdf|uob_2015.pdf
+Singapore, DBS Group Holdings Ltd, dbs.com,dbs_2025.pdf|dbs_2024.pdf|dbs_2023.pdf|dbs_2022.pdf|dbs_2021.pdf|dbs_2020.pdf|dbs_2019.pdf|dbs_2018.pdf|dbs_2017.pdf|dbs_2016.pdf|dbs_2015.pdf
+India, Bank of India Ltd, bankofindia.co.in, BOI_2025.pdf|BOI_2024.pdf|BOI_2023.pdf|BOI_2022.pdf|BOI_2021.pdf|BOI_2020.pdf|BOI_2019.pdf|BOI_2018.pdf|BOI_2017.pdf|BOI_2016.pdf|BOI_2015.pdf
+India, IDBI Bank Ltd, idbibank.in, IDBI_2025.pdf|IDBI_2024.pdf|IDBI_2023.pdf|IDBI_2022.pdf|IDBI_2021.pdf|IDBI_2020.pdf|IDBI_2019.pdf|IDBI_2018.pdf|IDBI_2017.pdf|IDBI_2016.pdf|IDBI_2015.pdf
+India, Karur Vysya Bank Ltd, kvb.bank.in, kvb_2025.pdf|kvb_2024.pdf|kvb_2023.pdf|kvb_2022.pdf|kvb_2021.pdf|kvb_2020.pdf|kvb_2019.pdf|kvb_2018.pdf|kvb_2017.pdf|kvb_2016.pdf|kvb_2015.pdf
+India, South Indian Bank Ltd, southindianbank.com, SIB_2025.pdf|SIB_2024.pdf|SIB_2023.pdf|SIB_2022.pdf|SIB_2021.pdf|SIB_2020.pdf|SIB_2019.pdf|SIB_2018.pdf|SIB_2017.pdf|SIB_2016.pdf|SIB_2015.pdf
+India, Axis Bank Ltd, axisbank.com, axis_2025.pdf|axis_2024.pdf|axis_2023.pdf|axis_2022.pdf|axis_2021.pdf|axis_2020.pdf|axis_2019.pdf|axis_2018.pdf|axis_2017.pdf|axis_2016.pdf|axis_2015.pdf
+India, Federal Bank Ltd, federalbank.co.in, fed_2025.pdf|fed_2024.pdf|fed_2023.pdf|fed_2022.pdf|fed_2021.pdf|fed_2020.pdf|fed_2019.pdf|fed_2018.pdf|fed_2017.pdf|fed_2016.pdf|fed_2015.pdf
+China, Ping An Bank Co Ltd, bank.pingan.com, pab_2025.pdf|pab_2024.pdf|pab_2023.pdf|pab_2022.pdf|pab_2021.pdf|pab_2020.pdf|pab_2019.pdf|pab_2018.pdf|pab_2017.pdf|pab_2016.pdf|pab_2015.pdf
+China, Shanghai Pudong Development Bank Co Ltd, spdb.com.cn, spdb_2025.pdf|spdb_2024.pdf|spdb_2023.pdf|spdb_2022.pdf|spdb_2021.pdf|spdb_2020.pdf|spdb_2019.pdf|spdb_2018.pdf|spdb_2017.pdf|spdb_2016.pdf|spdb_2015.pdf
+India, Bank of Baroda Ltd, bankofbaroda.in, bob_2025.pdf|bob_2024.pdf|bob_2023.pdf|bob_2022.pdf|bob_2021.pdf|bob_2020.pdf|bob_2019.pdf|bob_2018.pdf|bob_2017.pdf|bob_2016.pdf|bob_2015.pdf
+India, Kotak Mahindra Bank Ltd, kotak.com, kotak_2025.pdf|kotak_2024.pdf|kotak_2023.pdf|kotak_2022.pdf|kotak_2021.pdf|kotak_2020.pdf|kotak_2019.pdf|kotak_2018.pdf|kotak_2017.pdf|kotak_2016.pdf|kotak_2015.pdf
+India, State Bank of India, sbi.bank.in, sbi_2025.pdf|sbi_2024.pdf|sbi_2023.pdf|sbi_2022.pdf|sbi_2021.pdf|sbi_2020.pdf|sbi_2019.pdf|sbi_2018.pdf|sbi_2017.pdf|sbi_2016.pdf|sbi_2015.pdf
+India, Indian Overseas Bank, iob.in, iob_2025.pdf|iob_2024.pdf|iob_2023.pdf|iob_2022.pdf|iob_2021.pdf|iob_2020.pdf|iob_2019.pdf|iob_2018.pdf|iob_2017.pdf|iob_2016.pdf|iob_2015.pdf
+India, ICICI Bank Ltd, icicibank.in, icici_2025.pdf|icici_2024.pdf|icici_2023.pdf|icici_2022.pdf|icici_2021.pdf|icici_2020.pdf|icici_2019.pdf|icici_2018.pdf|icici_2017.pdf|icici_2016.pdf|icici_2015.pdf
+India, Indusind Bank Ltd, indusind.com, indus_2025.pdf|indus_2024.pdf|indus_2023.pdf|indus_2022.pdf|indus_2021.pdf|indus_2020.pdf|indus_2019.pdf|indus_2018.pdf|indus_2017.pdf|indus_2016.pdf|indus_2015.pdf
+China, China Merchants Bank Co Ltd, cmbchina.com, cmbchina_2025.pdf|cmbchina_2024.pdf|cmbchina_2023.pdf|cmbchina_2022.pdf|cmbchina_2021.pdf|cmbchina_2020.pdf|cmbchina_2019.pdf|cmbchina_2018.pdf|cmbchina_2017.pdf|cmbchina_2016.pdf|cmbchina_2015.pdf
+India, Punjab National Bank, pnbindia.in, pnb_2025.pdf|pnb_2024.pdf|pnb_2023.pdf|pnb_2022.pdf|pnb_2021.pdf|pnb_2020.pdf|pnb_2019.pdf|pnb_2018.pdf|pnb_2017.pdf|pnb_2016.pdf|pnb_2015.pdf
