@@ -105,7 +105,7 @@ def wait_for_search_results(page, timeout=30000):
         raise Exception("Result content did not appear within timeout")
 
 
-def automate_pse(KEYWORD_INVENTORY_FILE, INVENTORY_FILE, WEB_OUTPUT_FILE, PSE_URL):
+def automate_pse(KEYWORD_INVENTORY_FILE, INVENTORY_FILE, WEB_OUTPUT_FILE, PSE_URL, debug=False):
     print("🚀 Starting PSE Automation with Playwright...\n")
 
     # Load data
@@ -186,41 +186,43 @@ def automate_pse(KEYWORD_INVENTORY_FILE, INVENTORY_FILE, WEB_OUTPUT_FILE, PSE_UR
                                 count = extract_result_count(page)
                                 print(f"✅ Results: {count}")
 
+                                if debug:
+                                    user_input = input("Search completed. Press 'd' to continue in debug mode, 'n' to continue normally: ").strip().lower()
+                                    if user_input == 'n':
+                                        debug = False
+
                                 # Close page
                                 page.close()
                                 break  # Success, exit retry loop
 
                             except Exception as e:
-                                page.close()
-                                if "CAPTCHA" in str(e):
-                                    failure_reason = "CAPTCHA"
-                                    if attempt < max_retries - 1:
-                                        delay = (attempt + 1) * 10  # 10s, 20s, 30s
-                                        print(f"🚫 CAPTCHA detected, retrying in {delay}s...")
-                                        time.sleep(delay)
-                                    else:
-                                        print("🚫 CAPTCHA persists after retries. Please solve the CAPTCHA manually in the browser window.")
-                                        input("Press Enter after solving the CAPTCHA to continue...")
-                                        # After manual intervention, try once more
-                                        try:
-                                            page = browser.new_page()
-                                            page.goto(PSE_URL)
-                                            count = extract_result_count(page)
-                                            page.close()
-                                            print(f"✅ Results after manual intervention: {count}")
-                                            break
-                                        except:
-                                            print("❌ Still failed after manual intervention. Skipping this search.")
-                                            failure_reason = "MANUAL_FAILED"
-                                            count = 0
-                                            break
-                                elif "No valid result count found" in str(e):
-                                    count = 0
-                                    break
+                                # Treat all errors (network, CAPTCHA, result extraction) as potential CAPTCHA
+                                if attempt < max_retries - 1:
+                                    # Apply escalating delays: 10s for attempts 0-1, 30s for attempt 2
+                                    delay = 10 if attempt < 2 else 30
+                                    print(f"⚠️  Error encountered: {e}")
+                                    print(f"⏳ Retrying in {delay}s (attempt {attempt + 1}/3)...")
+                                    time.sleep(delay)
+                                    page.close()
                                 else:
-                                    failure_reason = "ERROR"
-                                    print(f"❌ Error: {e}. Retrying...")
-                                    time.sleep(5)
+                                    # All retries exhausted - wait for manual intervention without closing page
+                                    print(f"\n🚫 All automated retries exhausted. Error: {e}")
+                                    print("Please manually resolve the issue (solve CAPTCHA, check network, etc.) in the browser window.")
+                                    user_resolution = input("Press Enter after resolving the issue to continue...")
+                                    
+                                    # Try to extract count from the current page
+                                    try:
+                                        count = extract_result_count(page)
+                                        print(f"✅ Results after manual intervention: {count}")
+                                        page.close()
+                                        break
+                                    except Exception as retry_e:
+                                        print(f"❌ Still unable to extract results after manual intervention: {retry_e}")
+                                        print("Skipping this search.")
+                                        failure_reason = "MANUAL_INTERVENTION_FAILED"
+                                        count = 0
+                                        page.close()
+                                        break
 
                         if count is None:
                             count = 0  # Fallback

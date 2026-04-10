@@ -337,7 +337,9 @@ def main():
         print("⏸️  Skipping Manual Web Helper (Toggle is Off)")
 
     if RUN_PSE_AUTOMATION:
-        automate_pse(KEYWORD_INVENTORY_FILE, INVENTORY_FILE, WEB_OUTPUT_FILE, PSE_URL)
+        debug_input = input("Enable debug mode for PSE automation? (y/n): ").strip().lower()
+        debug = debug_input == 'y'
+        automate_pse(KEYWORD_INVENTORY_FILE, INVENTORY_FILE, WEB_OUTPUT_FILE, PSE_URL, debug=debug)
     else:
         print("⏸️  Skipping PSE Automation (Toggle is Off)")
 
