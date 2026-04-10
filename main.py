@@ -255,8 +255,8 @@ def calculate_fintech_index(PDF_FILE, WEB_FILE, FINAL_OUTPUT_FILE, KEYWORDS, ban
 def main():
     load_dotenv()
     API_KEY = os.environ.get("SERPAPI_KEY")
-    
-    # === 🎛️ MASTER COMMAND CENTER ===
+
+        # === 🎛️ MASTER COMMAND CENTER ===
     # Set these to True or False to run specific parts of the pipeline
     RUN_PDF_MODULE = False
     RUN_WEB_MODULE = False
@@ -274,6 +274,19 @@ def main():
     PSE_URL = os.environ.get("PSE_URL")
 
     os.makedirs("data", exist_ok=True)
+    
+    # Check for incomplete data log
+    log_file = "data/failed_searches.log"
+    if os.path.exists(log_file):
+        print("⚠️ WARNING: Failed searches detected from previous runs.")
+        with open(log_file, 'r', encoding='utf-8') as log:
+            content = log.read()
+            print(content)
+        recollect = input("Do you want to run PSE automation to recollect missing data? (y/n): ").strip().lower()
+        if recollect == 'y':
+            RUN_PSE_AUTOMATION = True
+        else:
+            print("Proceeding with available data...")
 
     # --- STEP 1: LOAD KEYWORDS ---
     keywords_dict = {}
