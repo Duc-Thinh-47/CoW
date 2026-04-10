@@ -45,6 +45,7 @@ def load_banks(inventory_file):
 def extract_result_count(page):
     """Extract total results count from PSE results page."""
     try:
+        '''
         # Check for CAPTCHA with improved selectors
         captcha_selectors = [
             'text=/are you a robot/i',
@@ -61,6 +62,7 @@ def extract_result_count(page):
         for selector in captcha_selectors:
             if page.locator(selector).count() > 0:
                 raise Exception("CAPTCHA detected")
+        '''
 
         # Try to locate and parse results info
         results_locator = page.locator('.gsc-result-info')
