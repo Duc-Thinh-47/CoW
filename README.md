@@ -94,6 +94,25 @@ python main.py
 ### 5. Review the Results
 The script will print its progress and output intermediate results to the `data/` folder so it can resume if interrupted. Once all modules finish, it will generate `data/fintech_index_final_scores.csv`, containing your fully weighted and ranked Time-Series Fintech Index.
 
+### 6. Visualize the Final Index Scores
+After `main.py` finishes and `data/fintech_index_final_scores.csv` exists, run the visualization module:
+```bash
+python data_visualization.py
+```
+This will create `data/fintech_index_visualization.html`. Open the generated HTML in a browser to explore:
+- Fintech Index score trends over time for the top banks
+- Top bank comparisons for each year using the chart dropdown
+
+Optional arguments:
+```bash
+python data_visualization.py --input data/fintech_index_final_scores.csv --output data/fintech_index_visualization.html --top 15 --banks "State Bank of India,Axis Bank Ltd"
+```
+
+If you use a fresh environment, re-run:
+```bash
+pip install -r requirements.txt
+```
+
 ## Mathematics details: Entropy Weight Method (EWM)
 
 CoW uses the **Entropy Weight Method (EWM)** to objectively calculate the Fintech Index. Unlike subjective scoring systems where a human guesses which keywords are most important, EWM lets the data decide. It is rooted in Information Theory: if every bank mentions a keyword equally, that keyword provides zero differentiating information and gets a low weight. If only one bank dominates a keyword, it provides high information and gets a heavy weight.

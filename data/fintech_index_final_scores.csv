@@ -1,3 +1,551 @@
 Year,Rank,Bank,Fintech_Index_Score
-2025,1,United Overseas Bank,1.0
-2024,1,United Overseas Bank,1.0
+2025,1,Central Bank of India Ltd,0.181785
+2025,2,State Bank of India,0.151851
+2025,3,Axis Bank Ltd,0.089638
+2025,4,Kotak Mahindra Bank Ltd,0.074257
+2025,5,United Overseas Bank Ltd,0.066536
+2025,6,HDFC Bank Ltd,0.058293
+2025,7,IDFC First Bank Ltd,0.052099
+2025,8,Bank of Baroda Ltd,0.051413
+2025,9,DBS Group Holdings Ltd,0.033519
+2025,10,IDBI Bank Ltd,0.03264
+2025,11,Canara Bank Ltd,0.026743
+2025,12,Federal Bank Ltd,0.019165
+2025,13,Jammu and Kashmir Bank Ltd,0.018938
+2025,14,Yes Bank Ltd,0.018631
+2025,15,South Indian Bank Ltd,0.015704
+2025,16,Oversea-Chinese Banking Corporation Ltd,0.012564
+2025,17,Karur Vysya Bank Ltd,0.009217
+2025,18,Indusind Bank Ltd,0.008876
+2025,19,AU Small Finance Bank Ltd,0.008134
+2025,20,Punjab National Bank,0.008127
+2025,21,UCO Bank,0.006146
+2025,22,Bandhan Bank Ltd,0.006145
+2025,23,China Everbright Bank Co Ltd,0.004847
+2025,24,Bank of Chongqing Co Ltd,0.004538
+2025,25,Agricultural Bank of China Ltd,0.004194
+2025,26,Bank of China Ltd,0.003828
+2025,27,Bank of India Ltd,0.003443
+2025,28,City Union Bank Ltd,0.003439
+2025,29,Capital Small Finance Bank Ltd,0.003023
+2025,30,Indian Bank,0.002774
+2025,31,China Citic Bank Corp Ltd,0.00265
+2025,32,ICICI Bank Ltd,0.002644
+2025,33,Indian Overseas Bank,0.001703
+2025,34,China Bohai Bank Co Ltd,0.001532
+2025,35,Hua Xia Bank Co Ltd,0.001522
+2025,36,Bank of Communications Co Ltd,0.001508
+2025,37,DCB Bank Ltd,0.001359
+2025,38,Suryoday Small Finance Bank Ltd,0.001315
+2025,39,CSB Bank Ltd,0.001164
+2025,40,Bank of Qingdao Co Ltd,0.001135
+2025,41,Shanghai Rural Commercial Bank Co Ltd,0.001032
+2025,42,Bank of Ningbo Co Ltd,0.000646
+2025,43,Shanghai Pudong Development Bank Co Ltd,0.000556
+2025,44,Tamilnad Mercantile Bank Ltd,0.000546
+2025,45,Industrial Bank Co Ltd,0.00017
+2025,46,Bank of Jiangsu Co Ltd,1.5e-05
+2025,47,Ping An Bank Co Ltd,0.0
+2025,48,China Merchants Bank Co Ltd,0.0
+2025,49,China Construction Bank Corp,0.0
+2025,50,Bank of Shanghai Co Ltd,0.0
+2024,1,State Bank of India,0.19518
+2024,2,Axis Bank Ltd,0.173828
+2024,3,Central Bank of India Ltd,0.167445
+2024,4,Kotak Mahindra Bank Ltd,0.112299
+2024,5,Bank of Baroda Ltd,0.050245
+2024,6,Indusind Bank Ltd,0.047382
+2024,7,Yes Bank Ltd,0.033548
+2024,8,IDFC First Bank Ltd,0.024594
+2024,9,HDFC Bank Ltd,0.024466
+2024,10,AU Small Finance Bank Ltd,0.019368
+2024,11,Oversea-Chinese Banking Corporation Ltd,0.017247
+2024,12,DBS Group Holdings Ltd,0.017082
+2024,13,Federal Bank Ltd,0.008967
+2024,14,South Indian Bank Ltd,0.007407
+2024,15,Punjab National Bank,0.007132
+2024,16,United Overseas Bank Ltd,0.006573
+2024,17,Shanghai Pudong Development Bank Co Ltd,0.005134
+2024,18,UCO Bank,0.005026
+2024,19,Bank of India Ltd,0.004944
+2024,20,China Citic Bank Corp Ltd,0.004402
+2024,21,Shanghai Rural Commercial Bank Co Ltd,0.004281
+2024,22,Bank of China Ltd,0.004261
+2024,23,Industrial Bank Co Ltd,0.004186
+2024,24,Jammu and Kashmir Bank Ltd,0.004108
+2024,25,City Union Bank Ltd,0.003732
+2024,26,Karur Vysya Bank Ltd,0.003526
+2024,27,Bandhan Bank Ltd,0.003267
+2024,28,Ping An Bank Co Ltd,0.003166
+2024,29,ICICI Bank Ltd,0.002755
+2024,30,Bank of Communications Co Ltd,0.002554
+2024,31,Bank of Shanghai Co Ltd,0.00253
+2024,32,IDBI Bank Ltd,0.002406
+2024,33,Capital Small Finance Bank Ltd,0.002379
+2024,34,Hua Xia Bank Co Ltd,0.002366
+2024,35,China Construction Bank Corp,0.002324
+2024,36,China Everbright Bank Co Ltd,0.0022
+2024,37,China Merchants Bank Co Ltd,0.002064
+2024,38,Bank of Jiangsu Co Ltd,0.001633
+2024,39,Bank of Ningbo Co Ltd,0.001526
+2024,40,Agricultural Bank of China Ltd,0.001517
+2024,41,Indian Bank,0.001516
+2024,42,Bank of Chongqing Co Ltd,0.001486
+2024,43,DCB Bank Ltd,0.001359
+2024,44,Indian Overseas Bank,0.001286
+2024,45,China Bohai Bank Co Ltd,0.001261
+2024,46,Canara Bank Ltd,0.00123
+2024,47,CSB Bank Ltd,0.001136
+2024,48,Suryoday Small Finance Bank Ltd,0.001068
+2024,49,Bank of Qingdao Co Ltd,0.000357
+2024,50,Tamilnad Mercantile Bank Ltd,0.000249
+2023,1,Bank of Baroda Ltd,0.244793
+2023,2,Central Bank of India Ltd,0.190348
+2023,3,State Bank of India,0.104764
+2023,4,Axis Bank Ltd,0.078317
+2023,5,AU Small Finance Bank Ltd,0.064184
+2023,6,IDFC First Bank Ltd,0.059136
+2023,7,DBS Group Holdings Ltd,0.04303
+2023,8,United Overseas Bank Ltd,0.027861
+2023,9,Oversea-Chinese Banking Corporation Ltd,0.020502
+2023,10,Indusind Bank Ltd,0.019551
+2023,11,Kotak Mahindra Bank Ltd,0.016832
+2023,12,HDFC Bank Ltd,0.014949
+2023,13,South Indian Bank Ltd,0.007777
+2023,14,Federal Bank Ltd,0.006235
+2023,15,Karur Vysya Bank Ltd,0.006164
+2023,16,Yes Bank Ltd,0.004858
+2023,17,Bank of China Ltd,0.004676
+2023,18,UCO Bank,0.004623
+2023,19,China Construction Bank Corp,0.004578
+2023,20,IDBI Bank Ltd,0.004038
+2023,21,Bank of Shanghai Co Ltd,0.003921
+2023,22,Jammu and Kashmir Bank Ltd,0.003865
+2023,23,Industrial Bank Co Ltd,0.003576
+2023,24,Canara Bank Ltd,0.003544
+2023,25,China Citic Bank Corp Ltd,0.003298
+2023,26,Agricultural Bank of China Ltd,0.003228
+2023,27,China Everbright Bank Co Ltd,0.003228
+2023,28,Bandhan Bank Ltd,0.002947
+2023,29,Bank of India Ltd,0.002915
+2023,30,City Union Bank Ltd,0.00286
+2023,31,ICICI Bank Ltd,0.002843
+2023,32,Shanghai Pudong Development Bank Co Ltd,0.002799
+2023,33,Hua Xia Bank Co Ltd,0.002758
+2023,34,Bank of Ningbo Co Ltd,0.002554
+2023,35,China Merchants Bank Co Ltd,0.002522
+2023,36,Shanghai Rural Commercial Bank Co Ltd,0.002485
+2023,37,Bank of Communications Co Ltd,0.00223
+2023,38,Punjab National Bank,0.00223
+2023,39,CSB Bank Ltd,0.002099
+2023,40,Ping An Bank Co Ltd,0.001946
+2023,41,China Bohai Bank Co Ltd,0.001803
+2023,42,Indian Bank,0.001801
+2023,43,Bank of Chongqing Co Ltd,0.001769
+2023,44,Bank of Jiangsu Co Ltd,0.001607
+2023,45,Bank of Qingdao Co Ltd,0.001591
+2023,46,Indian Overseas Bank,0.001379
+2023,47,Tamilnad Mercantile Bank Ltd,0.001347
+2023,48,DCB Bank Ltd,0.0013
+2023,49,Suryoday Small Finance Bank Ltd,0.001234
+2023,50,Capital Small Finance Bank Ltd,0.001106
+2022,1,IDFC First Bank Ltd,0.278287
+2022,2,Central Bank of India Ltd,0.164919
+2022,3,State Bank of India,0.126914
+2022,4,Axis Bank Ltd,0.061914
+2022,5,DBS Group Holdings Ltd,0.042545
+2022,6,HDFC Bank Ltd,0.02996
+2022,7,Bank of Baroda Ltd,0.028892
+2022,8,Oversea-Chinese Banking Corporation Ltd,0.024401
+2022,9,AU Small Finance Bank Ltd,0.024208
+2022,10,Kotak Mahindra Bank Ltd,0.022784
+2022,11,United Overseas Bank Ltd,0.013894
+2022,12,Indusind Bank Ltd,0.013112
+2022,13,Ping An Bank Co Ltd,0.011
+2022,14,China Construction Bank Corp,0.010592
+2022,15,South Indian Bank Ltd,0.008607
+2022,16,China Citic Bank Corp Ltd,0.007744
+2022,17,Federal Bank Ltd,0.007656
+2022,18,Agricultural Bank of China Ltd,0.007464
+2022,19,CSB Bank Ltd,0.007166
+2022,20,IDBI Bank Ltd,0.007001
+2022,21,Jammu and Kashmir Bank Ltd,0.006823
+2022,22,Bank of Shanghai Co Ltd,0.006485
+2022,23,China Bohai Bank Co Ltd,0.006134
+2022,24,Bank of China Ltd,0.006052
+2022,25,Karur Vysya Bank Ltd,0.005983
+2022,26,Bank of Chongqing Co Ltd,0.005397
+2022,27,China Everbright Bank Co Ltd,0.005392
+2022,28,City Union Bank Ltd,0.005322
+2022,29,China Merchants Bank Co Ltd,0.005267
+2022,30,Bandhan Bank Ltd,0.004928
+2022,31,Yes Bank Ltd,0.004759
+2022,32,Industrial Bank Co Ltd,0.004705
+2022,33,Hua Xia Bank Co Ltd,0.004611
+2022,34,Bank of Communications Co Ltd,0.003182
+2022,35,Shanghai Rural Commercial Bank Co Ltd,0.002815
+2022,36,Bank of Ningbo Co Ltd,0.002792
+2022,37,Canara Bank Ltd,0.002411
+2022,38,ICICI Bank Ltd,0.002343
+2022,39,UCO Bank,0.002305
+2022,40,DCB Bank Ltd,0.002156
+2022,41,Indian Overseas Bank,0.002106
+2022,42,Shanghai Pudong Development Bank Co Ltd,0.001848
+2022,43,Bank of India Ltd,0.001825
+2022,44,Bank of Qingdao Co Ltd,0.001795
+2022,45,Indian Bank,0.001294
+2022,46,Suryoday Small Finance Bank Ltd,0.00113
+2022,47,Capital Small Finance Bank Ltd,0.000411
+2022,48,Punjab National Bank,0.000346
+2022,49,Bank of Jiangsu Co Ltd,0.000322
+2022,50,Tamilnad Mercantile Bank Ltd,0.0
+2021,1,United Overseas Bank Ltd,0.157668
+2021,2,State Bank of India,0.13851
+2021,3,DBS Group Holdings Ltd,0.125289
+2021,4,Bank of Shanghai Co Ltd,0.087833
+2021,5,Axis Bank Ltd,0.083343
+2021,6,Central Bank of India Ltd,0.043104
+2021,7,IDFC First Bank Ltd,0.042302
+2021,8,Oversea-Chinese Banking Corporation Ltd,0.030747
+2021,9,HDFC Bank Ltd,0.024463
+2021,10,Bank of Baroda Ltd,0.020632
+2021,11,Jammu and Kashmir Bank Ltd,0.018681
+2021,12,AU Small Finance Bank Ltd,0.01602
+2021,13,Kotak Mahindra Bank Ltd,0.015795
+2021,14,IDBI Bank Ltd,0.01471
+2021,15,Bank of China Ltd,0.014087
+2021,16,Yes Bank Ltd,0.013064
+2021,17,China Construction Bank Corp,0.011866
+2021,18,South Indian Bank Ltd,0.010542
+2021,19,Indusind Bank Ltd,0.009361
+2021,20,Federal Bank Ltd,0.008292
+2021,21,China Merchants Bank Co Ltd,0.00819
+2021,22,Bank of Communications Co Ltd,0.007705
+2021,23,China Bohai Bank Co Ltd,0.007283
+2021,24,China Citic Bank Corp Ltd,0.00721
+2021,25,Bank of Chongqing Co Ltd,0.006794
+2021,26,Agricultural Bank of China Ltd,0.006554
+2021,27,China Everbright Bank Co Ltd,0.006298
+2021,28,Industrial Bank Co Ltd,0.006031
+2021,29,Karur Vysya Bank Ltd,0.005365
+2021,30,Bandhan Bank Ltd,0.004858
+2021,31,Shanghai Rural Commercial Bank Co Ltd,0.004799
+2021,32,Punjab National Bank,0.004526
+2021,33,Hua Xia Bank Co Ltd,0.00449
+2021,34,CSB Bank Ltd,0.004384
+2021,35,UCO Bank,0.003985
+2021,36,ICICI Bank Ltd,0.003449
+2021,37,Bank of Qingdao Co Ltd,0.003007
+2021,38,Canara Bank Ltd,0.002901
+2021,39,Bank of Ningbo Co Ltd,0.002862
+2021,40,Bank of Jiangsu Co Ltd,0.002806
+2021,41,Indian Bank,0.002279
+2021,42,Shanghai Pudong Development Bank Co Ltd,0.002131
+2021,43,Bank of India Ltd,0.001989
+2021,44,DCB Bank Ltd,0.001826
+2021,45,Suryoday Small Finance Bank Ltd,0.00061
+2021,46,City Union Bank Ltd,0.000465
+2021,47,Capital Small Finance Bank Ltd,0.00041
+2021,48,Ping An Bank Co Ltd,0.00027
+2021,49,Indian Overseas Bank,0.000215
+2021,50,Tamilnad Mercantile Bank Ltd,0.0
+2020,1,DBS Group Holdings Ltd,0.178615
+2020,2,State Bank of India,0.155363
+2020,3,Oversea-Chinese Banking Corporation Ltd,0.109696
+2020,4,Axis Bank Ltd,0.098532
+2020,5,United Overseas Bank Ltd,0.085766
+2020,6,HDFC Bank Ltd,0.046212
+2020,7,AU Small Finance Bank Ltd,0.030195
+2020,8,Bank of China Ltd,0.026384
+2020,9,Hua Xia Bank Co Ltd,0.024539
+2020,10,Bank of Baroda Ltd,0.018508
+2020,11,Kotak Mahindra Bank Ltd,0.017908
+2020,12,China Citic Bank Corp Ltd,0.016056
+2020,13,Ping An Bank Co Ltd,0.014837
+2020,14,China Construction Bank Corp,0.012452
+2020,15,Bank of Chongqing Co Ltd,0.010784
+2020,16,Bank of Shanghai Co Ltd,0.010093
+2020,17,China Merchants Bank Co Ltd,0.008591
+2020,18,Indusind Bank Ltd,0.008575
+2020,19,Shanghai Pudong Development Bank Co Ltd,0.008555
+2020,20,South Indian Bank Ltd,0.007432
+2020,21,Central Bank of India Ltd,0.007104
+2020,22,Federal Bank Ltd,0.007061
+2020,23,Yes Bank Ltd,0.006941
+2020,24,IDFC First Bank Ltd,0.006848
+2020,25,Agricultural Bank of China Ltd,0.006516
+2020,26,Bank of Communications Co Ltd,0.006181
+2020,27,Bank of Qingdao Co Ltd,0.006119
+2020,28,Industrial Bank Co Ltd,0.005881
+2020,29,Jammu and Kashmir Bank Ltd,0.00553
+2020,30,IDBI Bank Ltd,0.005212
+2020,31,Bank of Jiangsu Co Ltd,0.005181
+2020,32,Punjab National Bank,0.005096
+2020,33,China Bohai Bank Co Ltd,0.004699
+2020,34,ICICI Bank Ltd,0.004537
+2020,35,Bandhan Bank Ltd,0.004276
+2020,36,Shanghai Rural Commercial Bank Co Ltd,0.004133
+2020,37,UCO Bank,0.003308
+2020,38,Karur Vysya Bank Ltd,0.003081
+2020,39,Bank of Ningbo Co Ltd,0.002641
+2020,40,CSB Bank Ltd,0.002434
+2020,41,Indian Overseas Bank,0.001561
+2020,42,Canara Bank Ltd,0.00148
+2020,43,Bank of India Ltd,0.001422
+2020,44,City Union Bank Ltd,0.001201
+2020,45,DCB Bank Ltd,0.001156
+2020,46,Suryoday Small Finance Bank Ltd,0.000784
+2020,47,Indian Bank,0.00048
+2020,48,Tamilnad Mercantile Bank Ltd,3.9e-05
+2020,49,China Everbright Bank Co Ltd,0.0
+2020,50,Capital Small Finance Bank Ltd,0.0
+2019,1,State Bank of India,0.317661
+2019,2,United Overseas Bank Ltd,0.173662
+2019,3,Axis Bank Ltd,0.073747
+2019,4,DBS Group Holdings Ltd,0.07015
+2019,5,Bank of China Ltd,0.036843
+2019,6,AU Small Finance Bank Ltd,0.02956
+2019,7,Bank of Shanghai Co Ltd,0.02724
+2019,8,Oversea-Chinese Banking Corporation Ltd,0.024215
+2019,9,HDFC Bank Ltd,0.019399
+2019,10,China Everbright Bank Co Ltd,0.01525
+2019,11,Kotak Mahindra Bank Ltd,0.014672
+2019,12,Indusind Bank Ltd,0.013795
+2019,13,Bank of Communications Co Ltd,0.012631
+2019,14,China Construction Bank Corp,0.012003
+2019,15,Ping An Bank Co Ltd,0.010775
+2019,16,Hua Xia Bank Co Ltd,0.010494
+2019,17,Bank of Baroda Ltd,0.00981
+2019,18,Jammu and Kashmir Bank Ltd,0.009312
+2019,19,Industrial Bank Co Ltd,0.008892
+2019,20,Agricultural Bank of China Ltd,0.00813
+2019,21,Yes Bank Ltd,0.007692
+2019,22,China Merchants Bank Co Ltd,0.007566
+2019,23,China Bohai Bank Co Ltd,0.007257
+2019,24,Federal Bank Ltd,0.007098
+2019,25,China Citic Bank Corp Ltd,0.00694
+2019,26,Central Bank of India Ltd,0.006274
+2019,27,Bank of Jiangsu Co Ltd,0.005968
+2019,28,Shanghai Pudong Development Bank Co Ltd,0.005159
+2019,29,South Indian Bank Ltd,0.005107
+2019,30,ICICI Bank Ltd,0.004706
+2019,31,IDBI Bank Ltd,0.004494
+2019,32,Shanghai Rural Commercial Bank Co Ltd,0.004456
+2019,33,IDFC First Bank Ltd,0.003792
+2019,34,CSB Bank Ltd,0.003118
+2019,35,Bank of Chongqing Co Ltd,0.003066
+2019,36,Karur Vysya Bank Ltd,0.002841
+2019,37,Bank of Ningbo Co Ltd,0.00277
+2019,38,UCO Bank,0.002126
+2019,39,Canara Bank Ltd,0.001899
+2019,40,Indian Overseas Bank,0.001672
+2019,41,City Union Bank Ltd,0.001227
+2019,42,Indian Bank,0.00115
+2019,43,Bandhan Bank Ltd,0.001119
+2019,44,DCB Bank Ltd,0.000966
+2019,45,Suryoday Small Finance Bank Ltd,0.000947
+2019,46,Punjab National Bank,0.00089
+2019,47,Bank of India Ltd,0.000759
+2019,48,Capital Small Finance Bank Ltd,0.000701
+2019,49,Tamilnad Mercantile Bank Ltd,0.0
+2019,50,Bank of Qingdao Co Ltd,0.0
+2018,1,State Bank of India,0.205267
+2018,2,DBS Group Holdings Ltd,0.127803
+2018,3,Axis Bank Ltd,0.09771
+2018,4,United Overseas Bank Ltd,0.077048
+2018,5,Yes Bank Ltd,0.051009
+2018,6,Oversea-Chinese Banking Corporation Ltd,0.037986
+2018,7,China Bohai Bank Co Ltd,0.036602
+2018,8,Ping An Bank Co Ltd,0.032926
+2018,9,China Merchants Bank Co Ltd,0.02233
+2018,10,China Construction Bank Corp,0.021275
+2018,11,Bank of China Ltd,0.018129
+2018,12,China Citic Bank Corp Ltd,0.017437
+2018,13,HDFC Bank Ltd,0.016772
+2018,14,ICICI Bank Ltd,0.016609
+2018,15,Agricultural Bank of China Ltd,0.016258
+2018,16,Bank of Communications Co Ltd,0.01528
+2018,17,Hua Xia Bank Co Ltd,0.014873
+2018,18,CSB Bank Ltd,0.014543
+2018,19,Industrial Bank Co Ltd,0.013494
+2018,20,Bank of Qingdao Co Ltd,0.012016
+2018,21,Kotak Mahindra Bank Ltd,0.011086
+2018,22,Indusind Bank Ltd,0.010858
+2018,23,Jammu and Kashmir Bank Ltd,0.008115
+2018,24,Federal Bank Ltd,0.007913
+2018,25,Central Bank of India Ltd,0.007723
+2018,26,Shanghai Pudong Development Bank Co Ltd,0.006766
+2018,27,South Indian Bank Ltd,0.006682
+2018,28,Bandhan Bank Ltd,0.006655
+2018,29,IDFC First Bank Ltd,0.006427
+2018,30,Bank of Shanghai Co Ltd,0.006147
+2018,31,Bank of Chongqing Co Ltd,0.005989
+2018,32,Bank of Baroda Ltd,0.005599
+2018,33,China Everbright Bank Co Ltd,0.00539
+2018,34,Bank of Ningbo Co Ltd,0.005127
+2018,35,Shanghai Rural Commercial Bank Co Ltd,0.005088
+2018,36,AU Small Finance Bank Ltd,0.004424
+2018,37,Canara Bank Ltd,0.003959
+2018,38,Bank of India Ltd,0.003829
+2018,39,DCB Bank Ltd,0.003197
+2018,40,IDBI Bank Ltd,0.003076
+2018,41,Punjab National Bank,0.002984
+2018,42,Indian Overseas Bank,0.002514
+2018,43,Karur Vysya Bank Ltd,0.001782
+2018,44,City Union Bank Ltd,0.001057
+2018,45,Suryoday Small Finance Bank Ltd,0.000893
+2018,46,Indian Bank,0.000864
+2018,47,UCO Bank,0.000493
+2018,48,Bank of Jiangsu Co Ltd,0.0
+2018,49,Tamilnad Mercantile Bank Ltd,0.0
+2018,50,Capital Small Finance Bank Ltd,0.0
+2017,1,DBS Group Holdings Ltd,0.144594
+2017,2,State Bank of India,0.12461
+2017,3,United Overseas Bank Ltd,0.102004
+2017,4,Oversea-Chinese Banking Corporation Ltd,0.097961
+2017,5,Axis Bank Ltd,0.066883
+2017,6,HDFC Bank Ltd,0.049113
+2017,7,Industrial Bank Co Ltd,0.037252
+2017,8,China Merchants Bank Co Ltd,0.031673
+2017,9,China Bohai Bank Co Ltd,0.028119
+2017,10,Yes Bank Ltd,0.02619
+2017,11,Bank of China Ltd,0.021905
+2017,12,ICICI Bank Ltd,0.021062
+2017,13,Bank of Jiangsu Co Ltd,0.017715
+2017,14,China Citic Bank Corp Ltd,0.0162
+2017,15,Agricultural Bank of China Ltd,0.015779
+2017,16,China Construction Bank Corp,0.015539
+2017,17,Jammu and Kashmir Bank Ltd,0.013206
+2017,18,Bank of Communications Co Ltd,0.012347
+2017,19,Shanghai Pudong Development Bank Co Ltd,0.011198
+2017,20,Bank of Shanghai Co Ltd,0.010743
+2017,21,Bank of Ningbo Co Ltd,0.010203
+2017,22,CSB Bank Ltd,0.009266
+2017,23,China Everbright Bank Co Ltd,0.009237
+2017,24,Federal Bank Ltd,0.00845
+2017,25,Kotak Mahindra Bank Ltd,0.008403
+2017,26,IDFC First Bank Ltd,0.008159
+2017,27,Bank of Chongqing Co Ltd,0.007199
+2017,28,Bank of Qingdao Co Ltd,0.006253
+2017,29,Hua Xia Bank Co Ltd,0.005442
+2017,30,South Indian Bank Ltd,0.005094
+2017,31,IDBI Bank Ltd,0.004992
+2017,32,AU Small Finance Bank Ltd,0.004763
+2017,33,Canara Bank Ltd,0.004736
+2017,34,Shanghai Rural Commercial Bank Co Ltd,0.004525
+2017,35,Indian Bank,0.004443
+2017,36,Ping An Bank Co Ltd,0.004425
+2017,37,Bank of Baroda Ltd,0.004236
+2017,38,Indusind Bank Ltd,0.004216
+2017,39,UCO Bank,0.004069
+2017,40,Bandhan Bank Ltd,0.00353
+2017,41,Central Bank of India Ltd,0.003488
+2017,42,Bank of India Ltd,0.00266
+2017,43,Punjab National Bank,0.00247
+2017,44,DCB Bank Ltd,0.001732
+2017,45,City Union Bank Ltd,0.00148
+2017,46,Indian Overseas Bank,0.001431
+2017,47,Karur Vysya Bank Ltd,0.000899
+2017,48,Suryoday Small Finance Bank Ltd,0.000106
+2017,49,Tamilnad Mercantile Bank Ltd,0.0
+2017,50,Capital Small Finance Bank Ltd,0.0
+2016,1,State Bank of India,0.142501
+2016,2,United Overseas Bank Ltd,0.129965
+2016,3,Oversea-Chinese Banking Corporation Ltd,0.112277
+2016,4,DBS Group Holdings Ltd,0.084301
+2016,5,China Merchants Bank Co Ltd,0.058593
+2016,6,China Bohai Bank Co Ltd,0.052248
+2016,7,Bank of China Ltd,0.043824
+2016,8,Industrial Bank Co Ltd,0.040192
+2016,9,Axis Bank Ltd,0.038099
+2016,10,Central Bank of India Ltd,0.023496
+2016,11,Shanghai Pudong Development Bank Co Ltd,0.022264
+2016,12,Bank of Jiangsu Co Ltd,0.016106
+2016,13,Federal Bank Ltd,0.015695
+2016,14,China Citic Bank Corp Ltd,0.015042
+2016,15,CSB Bank Ltd,0.014186
+2016,16,China Everbright Bank Co Ltd,0.012609
+2016,17,Bank of Communications Co Ltd,0.011976
+2016,18,Ping An Bank Co Ltd,0.010711
+2016,19,IDBI Bank Ltd,0.010327
+2016,20,Bandhan Bank Ltd,0.010113
+2016,21,HDFC Bank Ltd,0.009767
+2016,22,Bank of Ningbo Co Ltd,0.00919
+2016,23,China Construction Bank Corp,0.008821
+2016,24,Yes Bank Ltd,0.008655
+2016,25,Punjab National Bank,0.008508
+2016,26,Shanghai Rural Commercial Bank Co Ltd,0.008136
+2016,27,Kotak Mahindra Bank Ltd,0.008061
+2016,28,IDFC First Bank Ltd,0.008038
+2016,29,Hua Xia Bank Co Ltd,0.007994
+2016,30,Agricultural Bank of China Ltd,0.007621
+2016,31,Bank of Baroda Ltd,0.007134
+2016,32,Bank of Shanghai Co Ltd,0.007106
+2016,33,Bank of Chongqing Co Ltd,0.006007
+2016,34,ICICI Bank Ltd,0.005804
+2016,35,Jammu and Kashmir Bank Ltd,0.005254
+2016,36,Bank of Qingdao Co Ltd,0.004577
+2016,37,Canara Bank Ltd,0.004488
+2016,38,AU Small Finance Bank Ltd,0.002502
+2016,39,South Indian Bank Ltd,0.001874
+2016,40,UCO Bank,0.001725
+2016,41,Indian Bank,0.001485
+2016,42,Indusind Bank Ltd,0.001465
+2016,43,Karur Vysya Bank Ltd,0.000486
+2016,44,DCB Bank Ltd,0.00041
+2016,45,Capital Small Finance Bank Ltd,0.000104
+2016,46,Indian Overseas Bank,9.8e-05
+2016,47,Bank of India Ltd,6.4e-05
+2016,48,Suryoday Small Finance Bank Ltd,5.5e-05
+2016,49,City Union Bank Ltd,4.7e-05
+2016,50,Tamilnad Mercantile Bank Ltd,0.0
+2015,1,DBS Group Holdings Ltd,0.416331
+2015,2,State Bank of India,0.143225
+2015,3,Central Bank of India Ltd,0.053868
+2015,4,Bank of China Ltd,0.029734
+2015,5,Oversea-Chinese Banking Corporation Ltd,0.023546
+2015,6,China Merchants Bank Co Ltd,0.023014
+2015,7,Industrial Bank Co Ltd,0.022408
+2015,8,United Overseas Bank Ltd,0.0201
+2015,9,China Bohai Bank Co Ltd,0.018976
+2015,10,Axis Bank Ltd,0.015786
+2015,11,UCO Bank,0.015039
+2015,12,Bank of India Ltd,0.01436
+2015,13,Bank of Communications Co Ltd,0.013879
+2015,14,Bank of Jiangsu Co Ltd,0.013428
+2015,15,Canara Bank Ltd,0.013338
+2015,16,Bank of Qingdao Co Ltd,0.011736
+2015,17,Shanghai Rural Commercial Bank Co Ltd,0.011026
+2015,18,Agricultural Bank of China Ltd,0.010502
+2015,19,Ping An Bank Co Ltd,0.01035
+2015,20,China Everbright Bank Co Ltd,0.01015
+2015,21,China Construction Bank Corp,0.008947
+2015,22,HDFC Bank Ltd,0.008773
+2015,23,Bank of Ningbo Co Ltd,0.008541
+2015,24,Shanghai Pudong Development Bank Co Ltd,0.008198
+2015,25,Hua Xia Bank Co Ltd,0.007588
+2015,26,China Citic Bank Corp Ltd,0.007002
+2015,27,CSB Bank Ltd,0.006075
+2015,28,Indian Overseas Bank,0.00607
+2015,29,IDFC First Bank Ltd,0.006036
+2015,30,Bandhan Bank Ltd,0.005746
+2015,31,Jammu and Kashmir Bank Ltd,0.004154
+2015,32,Bank of Baroda Ltd,0.003371
+2015,33,Bank of Shanghai Co Ltd,0.003231
+2015,34,Karur Vysya Bank Ltd,0.003206
+2015,35,ICICI Bank Ltd,0.003087
+2015,36,Yes Bank Ltd,0.003007
+2015,37,Punjab National Bank,0.002835
+2015,38,Indian Bank,0.002807
+2015,39,Bank of Chongqing Co Ltd,0.002651
+2015,40,IDBI Bank Ltd,0.002407
+2015,41,Federal Bank Ltd,0.002116
+2015,42,South Indian Bank Ltd,0.001973
+2015,43,Kotak Mahindra Bank Ltd,0.001134
+2015,44,DCB Bank Ltd,0.000105
+2015,45,Suryoday Small Finance Bank Ltd,7.2e-05
+2015,46,City Union Bank Ltd,6.1e-05
+2015,47,Indusind Bank Ltd,1.1e-05
+2015,48,Tamilnad Mercantile Bank Ltd,0.0
+2015,49,AU Small Finance Bank Ltd,0.0
+2015,50,Capital Small Finance Bank Ltd,0.0

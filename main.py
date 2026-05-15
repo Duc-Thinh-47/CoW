@@ -260,9 +260,9 @@ def main():
     # Set these to True or False to run specific parts of the pipeline
     RUN_PDF_MODULE = False
     RUN_WEB_MODULE = False
-    RUN_INDEX_CALCULATION = False
+    RUN_INDEX_CALCULATION = True
     RUN_MANUAL_WEB_HELPER = False
-    RUN_PSE_AUTOMATION = True  
+    RUN_PSE_AUTOMATION = False  
     # ===============================================
 
     # --- CONFIGURATION ---
